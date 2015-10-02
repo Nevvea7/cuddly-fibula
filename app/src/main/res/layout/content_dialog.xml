@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_horizontal_margin">
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:orientation="horizontal"
         android:layout_weight="1">
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/dialog_edittext_hint_search_term"
             android:id="@+id/dialog_search_term_edittext" />
-
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:layout_width="fill_parent"
@@ -20,7 +23,8 @@
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/dialog_search_location_edittext" />
+            android:id="@+id/dialog_search_location_edittext"
+            android:hint="@string/dialog_edittext_hint_search_loc"/>
     </android.support.design.widget.TextInputLayout>
 
 </LinearLayout>

@@ -24,4 +24,9 @@ public class FetchRestaurantTask extends AsyncTask<String, Void, Void>{
         Log.d("json check", businesses);
         return null;
     }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+    }
 }

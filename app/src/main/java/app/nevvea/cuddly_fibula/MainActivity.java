@@ -45,22 +45,21 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Find your favorite restaurant!")
                 .setView(dialogContent)
-                .setPositiveButton("lalala", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Go!", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         FetchRestaurantTask task = new FetchRestaurantTask(context, new MainActivityFragment());
-                        Log.d("json check", searchTermET.getText().toString());
                         task.execute(searchTermET.getText().toString(), searchLocET.getText().toString());
+                        dialogInterface.dismiss();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                        dialogInterface.cancel();
                     }
                 });
         AlertDialog dialog = builder.create();
-        Log.d("json check", "working");
         dialog.show();
     }
 
