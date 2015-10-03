@@ -4,22 +4,24 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private Context context;
-    MasterFragment masterFragment;
+    RecyclerView resultListRV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +31,10 @@ public class MainActivity extends AppCompatActivity {
 
         context = MainActivity.this;
 
-        CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-
-        FragmentManager fm = getSupportFragmentManager();
-        masterFragment = (MasterFragment) fm.findFragmentById(R.id.result_list_fragment);
+        resultListRV = (RecyclerView) findViewById(R.id.search_list_recycler_view);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+        resultListRV.setLayoutManager(layoutManager);
+        resultListRV.setAdapter(new RestaurantListAdapter(new ArrayList<SearchResult>(), context));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("Go!", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        FetchRestaurantTask task = new FetchRestaurantTask(context, masterFragment);
+                        FetchRestaurantTask task = new FetchRestaurantTask(context);
                         task.execute(searchTermET.getText().toString(), searchLocET.getText().toString());
                         dialogInterface.dismiss();
                     }
@@ -69,6 +70,10 @@ public class MainActivity extends AppCompatActivity {
                 });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public void onTaskFinished(List<SearchResult> result) {
+        resultListRV.setAdapter(new RestaurantListAdapter(result, context));
     }
 
     @Override

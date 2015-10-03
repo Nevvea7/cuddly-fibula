@@ -2,9 +2,7 @@ package app.nevvea.cuddly_fibula;
 
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,9 +42,8 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
     public void onBindViewHolder(ViewHolder holder, int position) {
         final SearchResult sr = resultList.get(position);
         holder.nameTV.setText(sr.getName());
-        holder.categoryTV.setText(sr.getCategory());
         Picasso.with(context)
-                .load(sr.getSnippetImg())
+                .load(sr.getRestImg())
                 .into(holder.snippetIV);
         Picasso.with(context)
                 .load(sr.getRatingImg())
@@ -54,9 +51,9 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle args = new Bundle();
-                args.putString(DetailFragment.REST_ID_TAG, sr.getId());
-                mainActivity.showFragment(DETAIL, args);
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra(DetailActivity.REST_ID_TAG, sr);
+                context.startActivity(intent);
             }
         });
     }
@@ -69,7 +66,6 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
     public class ViewHolder extends RecyclerView.ViewHolder {
         public View mView;
         public TextView nameTV;
-        public TextView categoryTV;
         public ImageView snippetIV;
         public ImageView ratingIV;
 
@@ -77,7 +73,6 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
             super(itemView);
             mView = itemView;
             nameTV = (TextView) mView.findViewById(R.id.search_list_restaurant_name);
-            categoryTV = (TextView) mView.findViewById(R.id.search_list_restaurant_category);
             snippetIV = (ImageView) mView.findViewById(R.id.search_list_restaurant_pic);
             ratingIV = (ImageView) mView.findViewById(R.id.search_list_restaurant_rating);
         }

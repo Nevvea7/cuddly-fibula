@@ -29,22 +29,12 @@
                 android:text="Friends"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-            <TextView
-                android:id="@+id/search_list_restaurant_category"
-                android:layout_alignLeft="@id/search_list_restaurant_name"
-                android:layout_alignStart="@id/search_list_restaurant_name"
-                android:layout_below="@id/search_list_restaurant_name"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="yo yo yo" />
-
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="30dp"
                 android:layout_alignLeft="@id/search_list_restaurant_name"
                 android:layout_alignStart="@id/search_list_restaurant_name"
-                android:layout_below="@id/search_list_restaurant_category"
+                android:layout_below="@id/search_list_restaurant_name"
                 android:id="@+id/search_list_restaurant_rating" />
         </RelativeLayout>
 
