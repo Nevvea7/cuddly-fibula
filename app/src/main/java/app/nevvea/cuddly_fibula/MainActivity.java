@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
     private Context context;
+    MainActivityFragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         context = MainActivity.this;
+
+        FragmentManager fm = getSupportFragmentManager();
+        mFragment = (MainActivityFragment) fm.findFragmentById(R.id.result_list_fragment);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("Go!", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        FetchRestaurantTask task = new FetchRestaurantTask(context, new MainActivityFragment());
+                        FetchRestaurantTask task = new FetchRestaurantTask(context, mFragment);
                         task.execute(searchTermET.getText().toString(), searchLocET.getText().toString());
                         dialogInterface.dismiss();
                     }

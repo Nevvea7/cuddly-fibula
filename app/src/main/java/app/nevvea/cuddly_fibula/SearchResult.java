@@ -8,12 +8,14 @@ public class SearchResult {
     private String category;
     private String id;
     private String snippetImg;
+    private String ratingImg;
 
-    public SearchResult(String n, String c, String i, String s) {
+    public SearchResult(String n, String c, String i, String s, String r) {
         name = n;
         category = c;
         id = i;
         snippetImg = s;
+        ratingImg = r;
     }
 
     public String getCategory() {
@@ -30,5 +32,9 @@ public class SearchResult {
 
     public String getSnippetImg() {
         return snippetImg;
+    }
+
+    public String getRatingImg() {
+        return ratingImg;
     }
 }

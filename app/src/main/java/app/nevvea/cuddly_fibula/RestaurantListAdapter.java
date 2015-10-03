@@ -40,11 +40,14 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         Picasso.with(context)
                 .load(sr.getSnippetImg())
                 .into(holder.snippetIV);
+        Picasso.with(context)
+                .load(sr.getRatingImg())
+                .into(holder.ratingIV);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return resultList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -52,6 +55,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         public TextView nameTV;
         public TextView categoryTV;
         public ImageView snippetIV;
+        public ImageView ratingIV;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -59,6 +63,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
             nameTV = (TextView) mView.findViewById(R.id.search_list_restaurant_name);
             categoryTV = (TextView) mView.findViewById(R.id.search_list_restaurant_category);
             snippetIV = (ImageView) mView.findViewById(R.id.search_list_restaurant_pic);
+            ratingIV = (ImageView) mView.findViewById(R.id.search_list_restaurant_rating);
         }
     }
 }
