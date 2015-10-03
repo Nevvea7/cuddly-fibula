@@ -9,5 +9,6 @@
 
     <string name="dialog_edittext_hint_search_term">What: e.g. Sushi, Noodles, …</string>
     <string name="dialog_edittext_hint_search_loc">Where: e.g. New York, Niagara Falls, …</string>
+    <string name="title_activity_detail">DetailActivity</string>
 
 </resources>

@@ -9,11 +9,11 @@ import java.util.List;
 /**
  * Created by Anna on 10/1/15.
  */
-public class FetchRestaurantTask extends AsyncTask<String, Void,List<SearchResult>>{
+public class FetchRestaurantTask extends AsyncTask<String, Void, List<SearchResult>>{
     private Context mContext;
-    MainActivityFragment mFragment;
+    MasterFragment mFragment;
 
-    public FetchRestaurantTask(Context context, MainActivityFragment fragment) {
+    public FetchRestaurantTask(Context context, MasterFragment fragment) {
         mContext = context;
         mFragment = fragment;
     }
@@ -23,8 +23,7 @@ public class FetchRestaurantTask extends AsyncTask<String, Void,List<SearchResul
         Yelp yelp = Yelp.getYelp(mContext);
         String businesses = yelp.search(strings[0], strings[1]);
         Log.d("json check", businesses);
-        List<SearchResult> results = Utility.processJson(businesses);
-        return results;
+        return Utility.processJson(businesses);
     }
 
     @Override

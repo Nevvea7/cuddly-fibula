@@ -1,6 +1,10 @@
 package app.nevvea.cuddly_fibula;
 
+
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,16 +23,20 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
 
     private List<SearchResult> resultList;
     private Context context;
+    MainActivity mainActivity;
+    private static final int DETAIL = 1;
 
     public RestaurantListAdapter (List<SearchResult> list, Context con) {
         resultList = list;
         context = con;
+        mainActivity = (MainActivity) context;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.cardview_result_list_item, parent, false);
+
         return new ViewHolder(itemView);
     }
 
@@ -43,6 +51,14 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         Picasso.with(context)
                 .load(sr.getRatingImg())
                 .into(holder.ratingIV);
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle args = new Bundle();
+                args.putString(DetailFragment.REST_ID_TAG, sr.getId());
+                mainActivity.showFragment(DETAIL, args);
+            }
+        });
     }
 
     @Override
