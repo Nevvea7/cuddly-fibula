@@ -1,4 +1,4 @@
-package app.nevvea.cuddly_fibula;
+package app.nevvea.cuddly_fibula.utilities;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -11,7 +11,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.nevvea.cuddly_fibula.activities.MainActivity;
+
 /**
+ * Calls the Yelp api and get results
  * Created by Anna on 10/1/15.
  */
 public class FetchRestaurantTask extends AsyncTask<String, Void, List<SearchResult>>{
@@ -25,16 +28,24 @@ public class FetchRestaurantTask extends AsyncTask<String, Void, List<SearchResu
     protected List<SearchResult> doInBackground(String... strings) {
         Yelp yelp = Yelp.getYelp(mContext);
         String businesses = yelp.search(strings[0], strings[1]);
-        Log.d("json check", businesses);
         return processJson(businesses);
     }
 
+    /**
+     * When the results are back, we call the onTaskFinished method in the MainActivity to
+     * update the UI
+     * @param results
+     */
     @Override
     protected void onPostExecute(List<SearchResult> results) {
-        Log.d("json check in post", results.get(0).getName());
         ((MainActivity) mContext).onTaskFinished(results);
     }
 
+    /**
+     * extract info that I need from the json string passed back by Yelp api
+     * @param jsonStr
+     * @return
+     */
     public List<SearchResult> processJson(String jsonStr) {
         List<SearchResult> res = new ArrayList<>();
         try {
@@ -42,7 +53,7 @@ public class FetchRestaurantTask extends AsyncTask<String, Void, List<SearchResu
             JSONObject json = new JSONObject(jsonStr);
             JSONArray businesses = json.getJSONArray("businesses");
 
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 40; i++) {
                 JSONObject curRes = businesses.getJSONObject(i);
                 String name = curRes.getString("name");
                 String id = curRes.getString("id");
@@ -51,7 +62,14 @@ public class FetchRestaurantTask extends AsyncTask<String, Void, List<SearchResu
                 String snippetTxt = curRes.getString("snippet_text");
                 String yelp = curRes.getString("mobile_url");
                 String rating = curRes.getString("rating_img_url");
-                String phone = curRes.getString("phone");
+                String phone;
+
+                try {
+                    phone = curRes.getString("phone");
+                } catch (JSONException e) {
+                    phone = "";
+                }
+
                 String address = formatAddress(curRes.getJSONObject("location"));
                 SearchResult sr = new SearchResult(name, id, restImg,
                         rating, address, phone, snippetImg, snippetTxt, yelp);

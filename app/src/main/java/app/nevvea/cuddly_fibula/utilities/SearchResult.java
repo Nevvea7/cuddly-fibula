@@ -1,4 +1,4 @@
-package app.nevvea.cuddly_fibula;
+package app.nevvea.cuddly_fibula.utilities;
 
 import java.io.Serializable;
 

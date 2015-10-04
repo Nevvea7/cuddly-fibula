@@ -30,11 +30,11 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
             <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
                 android:layout_alignLeft="@id/search_list_restaurant_name"
                 android:layout_alignStart="@id/search_list_restaurant_name"
-                android:layout_below="@id/search_list_restaurant_name"
+                android:layout_alignBottom="@id/search_list_restaurant_pic"
                 android:id="@+id/search_list_restaurant_rating" />
         </RelativeLayout>
 

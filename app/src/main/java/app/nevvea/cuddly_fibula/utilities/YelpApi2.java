@@ -1,4 +1,4 @@
-package app.nevvea.cuddly_fibula;
+package app.nevvea.cuddly_fibula.utilities;
 
 import org.scribe.builder.api.DefaultApi10a;
 import org.scribe.model.Token;

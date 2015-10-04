@@ -1,4 +1,4 @@
-package app.nevvea.cuddly_fibula;
+package app.nevvea.cuddly_fibula.utilities;
 
 import android.content.Context;
 
@@ -8,6 +8,8 @@ import org.scribe.model.Response;
 import org.scribe.model.Token;
 import org.scribe.model.Verb;
 import org.scribe.oauth.OAuthService;
+
+import app.nevvea.cuddly_fibula.R;
 
 /**
  * Created by Anna on 10/1/15.
